@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Google Classroom</title>
+    <link rel="stylesheet" href="../css/signin.css" />
+    <link rel="shortcut icon" href="/assets/images/google_tab_icon.png" />
+  </head>
+  <body>
+    <div class="main">
+      <div class="menu" id="menu">
+        <div class="menu-icon" onclick="toggleMenu()">
+          <img src="../../assets/images/menu.svg" alt="" />
+        </div>
+        <div class="menu-items" id="menuItems">
+          <ul>
+            <li id="about">About</li>
+            <li>Contact</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="logo">
+        <img src="../../assets/images/logo.png" alt="logo" class="logo-img" />
+      </div>
+      <h1 class="heading">
+        <div class="h_main">Sign in</div>
+        <div class="h_sub">with your Google Account</div>
+      </h1>
+
+      <div class="slide-content">
+        <div class="content1">
+          <form action="">
+            <div class="input-group">
+              <label class="field-label email-label" for="email" name="email"
+                >Email</label
+              >
+              <input
+                type="text"
+                class="field email-field"
+                id="email"
+                placeholder=""
+              />
+            </div>
+            <div class="input-group">
+              <label class="field-label password-label" for="password"
+                >Password</label
+              >
+              <input
+                type="password"
+                class="field password-field"
+                id="password"
+                placeholder=""
+              />
+            </div>
+            <span class="forgot"
+              ><a href="forgot_password.html">Forgot password?</a></span
+            >
+            <div class="info">
+              Not your computer? Use Guest mode to sign in privately.
+            </div>
+            <div class="create-next">
+              <span><a href="register.html">Create account</a></span>
+              <button class="btn" id="next" type="submit" name="email_submit">
+                Next
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script src="../js/signin.js"></script>
+  </body>
+</html>
