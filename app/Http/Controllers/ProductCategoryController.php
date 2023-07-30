@@ -37,6 +37,7 @@ class ProductCategoryController extends Controller
             return response()->json(['message' => 'Product created successfully']);
         }
 
+// __________________________________________________
 
     public function updateProduct(Request $request, $id)
     {
@@ -63,6 +64,8 @@ class ProductCategoryController extends Controller
 
         return response()->json(['message' => 'Product updated successfully', 'product' => $product], 200);
     }
+
+// ___________________________________________
 
     public function deleteProduct($id)
     {
