@@ -6,10 +6,13 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
+
 
 
 class ProductCategoryController extends Controller
 {
+
 
     public function createProduct(Request $request)
     {
@@ -78,6 +81,7 @@ class ProductCategoryController extends Controller
 
         return response()->json(['message' => 'Product deleted successfully'], 200);
     }
+    // _____________________________________________
 
     public function getProduct($id)
     {
@@ -88,6 +92,7 @@ class ProductCategoryController extends Controller
 
         return response()->json(['product' => $product], 200);
     }
+    // _____________________________________________________
 
     public function getAllProducts()
     {
@@ -95,7 +100,7 @@ class ProductCategoryController extends Controller
 
         return response()->json(['products' => $products], 200);
     }
-
+    // __________________________________________________
 
 
     public function updateCategory(Request $request, $id)
@@ -140,5 +145,87 @@ class ProductCategoryController extends Controller
     $category->save();
 
     return response()->json(['message' => 'Category created successfully', 'category' => $category], 201);
+}
+
+// _________________________________________________
+
+public function deleteCategory($id)
+{
+    $category = Category::find($id);
+    if (!$category) {
+        return response()->json(['error' => 'Category not found'], 404);
+    }
+
+    $category->delete();
+
+    return response()->json(['message' => 'Category deleted successfully'], 200);
+}
+// ____________________________________________________
+
+
+public function getCategory($id)
+{
+    $category = Category::find($id);
+    if (!$category) {
+        return response()->json(['error' => 'Category not found'], 404);
+    }
+
+    return response()->json(['Category' => $category], 200);
+}
+// _____________________________________________________
+
+public function getAllCategories()
+{
+    $category = Category::all();
+
+    return response()->json(['category' => $category], 200);
+}
+
+// ___________________________________________________________
+// --------------------------------------------------------------
+
+
+public function addToCart(Request $request, Product $product)
+{
+    $request->validate([
+        'quantity' => 'required|integer|min:1',
+    ]);
+
+    $user = Auth::users();
+
+    $cartItem = Cart::where('user_id', $user->id)
+        ->where('product_id', $product->id)
+        ->first();
+
+    if ($cartItem) {
+        $cartItem->quantity += $request->input('quantity');
+        $cartItem->save();
+    } else {
+        $cartItem = new Cart([
+            'user_id' => $user->id,
+            'product_id' => $product->id,
+            'quantity' => $request->input('quantity'),
+            'price' => $product->price,
+        ]);
+        $cartItem->save();
+    }
+    return response()->json(['message' => 'product added to cart successfully', 'product' => $product], 201);
+
+    // return redirect()->route('products.index')->with('success', 'Product added to cart successfully!');
+}
+
+
+
+
+public function index()
+{
+    $categories = Category::all();
+    return response()->json($categories);
+}
+
+public function index2()
+{
+    $products = Product::all();
+    return response()->json($products);
 }
 }

@@ -13,33 +13,32 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::group(['middleware' => 'api' ,'prefix'=>'auth'],function($router) {
+
+
     Route::post('/register',[AuthController::class,'register']);
     Route::post('/login',[AuthController::class,'login']);
     Route::get('/profile',[AuthController::class,'profile']);
     Route::post('/logout',[AuthController::class,'logout']);
  
-    // Route::get('/login', [AuthController::class, 'login'])->name('login');
+    Route::post('/products', [ProductCategoryController::class, 'createProduct']);//done
+    Route::put('/products/{id}', [ProductCategoryController::class, 'updateProduct']);//done
+    Route::delete('/products/{id}', [ProductCategoryController::class, 'deleteProduct']);//done
+    Route::get('/products/{id}', [ProductCategoryController::class, 'getProduct']);//doone
+    Route::get('/products', [ProductCategoryController::class, 'getAllProducts']);//done
 
+    Route::post('/products/{product}/add-to-cart', [ProductCategoryController::class, 'addToCart']);
+    // ->name('products.addToCart');
 
-
-
-
-    Route::post('/products', [ProductCategoryController::class, 'createProduct']);
-    Route::put('/products/{id}', [ProductCategoryController::class, 'updateProduct']);
-    // Route::put('/products/{id}', 'ProductCategoryController@updateProduct');
-
-    // Route::put('/products/{product}', 'ProductController@update')->name('products.update');
-
-    Route::delete('/products/{id}', [ProductCategoryController::class, 'deleteProduct']);
-    Route::get('/products/{id}', [ProductCategoryController::class, 'getProduct']);
-    Route::get('/products', [ProductCategoryController::class, 'getAllProducts']);
     
-    Route::post('/categories', [ProductCategoryController::class, 'createCategory']);
-    Route::put('/categories/{id}', [ProductCategoryController::class, 'updateCategory']);
-    Route::delete('/categories/{id}', [ProductCategoryController::class, 'deleteCategory']);
-    Route::get('/categories/{id}', [ProductCategoryController::class, 'getCategory']);
-    Route::get('/categories', [ProductCategoryController::class, 'getAllCategories']);
+    Route::post('/categories', [ProductCategoryController::class, 'createCategory']);//done
+    Route::put('/categories/{id}', [ProductCategoryController::class, 'updateCategory']);//done
+    Route::delete('/categories/{id}', [ProductCategoryController::class, 'deleteCategory']);//done
+    Route::get('/categories/{id}', [ProductCategoryController::class, 'getCategory']);//done
+    Route::get('/categories', [ProductCategoryController::class, 'getAllCategories']);//done
 
+    
+    Route::get('/categories', [ProductCategoryController::class, 'index']);
+    Route::get('/products', [ProductCategoryController::class, 'index2']);
 
 
 });

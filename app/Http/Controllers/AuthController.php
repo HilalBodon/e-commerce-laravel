@@ -67,14 +67,6 @@ class AuthController extends Controller
         'message' => 'user logged out registered']);
     }
 
-    // public function login(){
-    //     return view(view:'login');
-    // }
-
-    // public function registration(){
-    //     return view(view:'registeration');
-    // }
-
 
     public function loginPost(Request $request){
         $request->validate([
