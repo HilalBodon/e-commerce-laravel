@@ -205,27 +205,25 @@ public function addToCart(Request $request, Product $product)
             'user_id' => $user->id,
             'product_id' => $product->id,
             'quantity' => $request->input('quantity'),
-            'price' => $product->price,
         ]);
         $cartItem->save();
     }
     return response()->json(['message' => 'product added to cart successfully', 'product' => $product], 201);
 
-    // return redirect()->route('products.index')->with('success', 'Product added to cart successfully!');
 }
 
 
 
 
-public function index()
-{
-    $categories = Category::all();
-    return response()->json($categories);
-}
+    public function index()
+    {
+        $categories = Category::all();
+        return response()->json($categories);
+    }
 
-public function index2()
-{
-    $products = Product::all();
-    return response()->json($products);
-}
-}
+    public function index2()
+    {
+        $products = Product::all();
+        return response()->json($products);
+    }
+    }
