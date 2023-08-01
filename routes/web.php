@@ -26,3 +26,5 @@ Route::get('/', function () {
 
 //  Route::post('/login', [AuthController::class, 'loginPost'])->name('login.post');
 //  Route::post('/registration', [AuthController::class, 'registrationPost'])->name('registration.post');
+
+Route::post('/categories', [ProductCategoryController::class, 'createCategory']);
